@@ -108,7 +108,11 @@ SPICE_GLIB_REQUIRES="${SPICE_GLIB_REQUIRES} pixman-1 >= 0.17.7"
 PKG_CHECK_MODULES(SSL, openssl)
 AC_SUBST(SSL_CFLAGS)
 AC_SUBST(SSL_LIBS)
-SPICE_GLIB_REQUIRES="${SPICE_GLIB_REQUIRES} openssl"
+
+case $host_os in
+  freebsd*)       ;;
+  *)              SPICE_GLIB_REQUIRES="${SPICE_GLIB_REQUIRES} openssl" ;;
+esac
 
 SPICE_CHECK_SASL
 
